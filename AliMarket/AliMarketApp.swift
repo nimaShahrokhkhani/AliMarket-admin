@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import Firebase
 
 @main
 struct AliMarketApp: App {
+    init() {
+        FirebaseApp.configure()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }
