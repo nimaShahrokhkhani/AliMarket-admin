@@ -12,15 +12,22 @@ struct OrdersView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List(orderViewModel.orderList, id: \.id) { order in
-                    NavigationLink(destination: OrderDetailView(order: order)) {
-                        OrderView(order: order)
+                List {
+                    ForEach(orderViewModel.orderList, id: \.id) { order in
+                        NavigationLink(destination: OrderDetailView(order: order)) {
+                            OrderView(order: order)
+                        }
                     }
+                    .onDelete(perform: deleteOrder)
                 }
             }
             .navigationTitle("Orders")
         }
         .onAppear(perform: orderViewModel.fetchOrder)
+    }
+    
+    func deleteOrder(at offsets: IndexSet ) {
+        orderViewModel.orderList.remove(atOffsets: offsets)
     }
 }
 
